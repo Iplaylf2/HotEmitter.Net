@@ -6,12 +6,16 @@ namespace HotEmitter
 {
     public class Line<T>
     {
-        public Line(Emitter<T> emitter)
+        public Line(Func<Action<T>, Action> addReceiver)
         {
+            AddReceiver = addReceiver;
         }
 
-        public Action Connect(Action<T> action)
+        public virtual Action Connect(Action<T> action)
         {
+            return AddReceiver(action);
         }
+
+        private readonly Func<Action<T>, Action> AddReceiver;
     }
 }
