@@ -4,16 +4,16 @@ using System.Text;
 
 namespace HotEmitter
 {
-    public class Line<T>
+    class Line<T> : ILine<T>
     {
         public Line(Func<Action<T>, Action> addReceiver)
         {
             AddReceiver = addReceiver;
         }
 
-        public virtual Action Connect(Action<T> action)
+        public virtual Action Connect(Action<T> receiver)
         {
-            return AddReceiver(action);
+            return AddReceiver(receiver);
         }
 
         private readonly Func<Action<T>, Action> AddReceiver;

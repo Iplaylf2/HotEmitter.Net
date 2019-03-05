@@ -9,33 +9,46 @@ namespace HotEmitter
         {
             Line = new Line<T>(AddReceiver);
         }
+
+        public void Deconstruct(out Action<T> emit, out ILine<T> line)
+        {
+            emit = Emit;
+            line = Line;
+        }
+
         public void Emit(T value)
         {
-            foreach (var action in ReceiverSet)
+            var exList = new List<Exception>();
+            foreach (var receiver in ReceiverSet)
             {
                 try
                 {
-                    action(value);
+                    receiver(value);
                 }
                 catch (Exception ex)
                 {
+                    exList.Add(ex);
                 }
+            }
+            if (exList.Count != 0)
+            {
+                throw new AggregateException(exList.ToArray());
             }
         }
 
-        public Line<T> Line { get; }
+        public ILine<T> Line { get; }
 
-        internal Action AddReceiver(Action<T> action, Action<Exception> catchAction = null)
+        internal protected virtual Action AddReceiver(Action<T> receiver)
         {
-            ReceiverSet.Add(action);
+            ReceiverSet.Add(receiver);
+            return RemoveReceiver;
 
             void RemoveReceiver()
             {
-                ReceiverSet.Remove(action);
+                ReceiverSet.Remove(receiver);
             }
-            return RemoveReceiver;
         }
 
-        private HashSet<Action<T>> ReceiverSet = new HashSet<Action<T>>();
+        internal protected readonly HashSet<Action<T>> ReceiverSet = new HashSet<Action<T>>();
     }
 }
