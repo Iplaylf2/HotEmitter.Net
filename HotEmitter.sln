@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotEmitter", "HotEmitter\HotEmitter.csproj", "{4AEC5C28-1143-4CF2-A78A-90F4016959B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{1038F68C-47BB-47DF-A172-C3BC7502B155}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo", "Demo\Demo.csproj", "{1038F68C-47BB-47DF-A172-C3BC7502B155}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotEmitterTest", "HotEmitterTest\HotEmitterTest.csproj", "{B1B72870-5F8A-4808-9A32-B55CB166BDA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1038F68C-47BB-47DF-A172-C3BC7502B155}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1038F68C-47BB-47DF-A172-C3BC7502B155}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1038F68C-47BB-47DF-A172-C3BC7502B155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1B72870-5F8A-4808-9A32-B55CB166BDA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B72870-5F8A-4808-9A32-B55CB166BDA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B72870-5F8A-4808-9A32-B55CB166BDA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B72870-5F8A-4808-9A32-B55CB166BDA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
