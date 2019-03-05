@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace HotEmitter
 {
-    public static class Extension
+    public static class LineExtension
     {
         public static ILine<T> Filter<T>(this ILine<T> lineA, Func<T, Boolean> predicate)
         {
