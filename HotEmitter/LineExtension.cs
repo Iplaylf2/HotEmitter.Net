@@ -58,7 +58,7 @@ namespace HotEmitter
         public static ILine<T> Merge<T>(params ILine<T>[] lineArray)
         {
             var emitterB = new LoadEmitter<T>();
-            Action[] disconnectArray = Array.Empty<Action>();
+            var disconnectArray = Array.Empty<Action>();
 
             emitterB.BeLoad = OnBeLoad;
             emitterB.BeUnload = OnBeUnload;
