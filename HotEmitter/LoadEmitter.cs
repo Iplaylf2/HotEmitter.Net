@@ -11,9 +11,9 @@ namespace HotEmitter
 
         protected internal override Action AddReceiver(Action<T> receiver)
         {
-            var unloadLast = ReceiverSet.Count == 0;
+            var unloadBefore = ReceiverSet.Count == 0;
             var remove = base.AddReceiver(receiver);
-            if (unloadLast)
+            if (unloadBefore)
             {
                 BeLoad();
             }
@@ -22,10 +22,10 @@ namespace HotEmitter
 
             void removeReceiver()
             {
-                var loadLast = ReceiverSet.Count != 0;
+                var loadBefore = ReceiverSet.Count != 0;
                 remove();
                 var unload = ReceiverSet.Count == 0;
-                if (unload && loadLast)
+                if (unload && loadBefore)
                 {
                     BeUnload();
                 }
