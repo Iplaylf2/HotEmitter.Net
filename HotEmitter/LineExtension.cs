@@ -60,17 +60,17 @@ namespace HotEmitter
             var emitterB = new LoadEmitter<T>();
             Action[] disconnectArray = Array.Empty<Action>();
 
-            emitterB.BeLoadLine.Connect(OnBeLoad);
-            emitterB.BeUnloadLine.Connect(OnBeUnload);
+            emitterB.BeLoad = OnBeLoad;
+            emitterB.BeUnload = OnBeUnload;
 
             return emitterB.Line;
 
-            void OnBeLoad(Int32 _)
+            void OnBeLoad()
             {
                 disconnectArray = lineArray.Select(line => line.Connect(emitterB.Emit)).ToArray();
             }
 
-            void OnBeUnload(Int32 _)
+            void OnBeUnload()
             {
                 foreach (var disconnect in disconnectArray)
                 {
@@ -85,17 +85,17 @@ namespace HotEmitter
             var receiverAdapter = adapter(emitterB.Emit);
             Action disconnect = delegate { };
 
-            emitterB.BeLoadLine.Connect(OnBeLoad);
-            emitterB.BeUnloadLine.Connect(OnBeUnload);
+            emitterB.BeLoad = OnBeLoad;
+            emitterB.BeUnload = OnBeUnload;
 
             return emitterB.Line;
 
-            void OnBeLoad(Int32 _)
+            void OnBeLoad()
             {
                 disconnect = lineA.Connect(receiverAdapter);
             }
 
-            void OnBeUnload(Int32 _)
+            void OnBeUnload()
             {
                 disconnect();
             }

@@ -6,32 +6,30 @@ namespace HotEmitter
 {
     internal class LoadEmitter<T> : Emitter<T>
     {
-        public ILine<Int32> BeLoadLine => BeLoadEmitter.Line;
-        public ILine<Int32> BeUnloadLine => BeUnloadEmitter.Line;
+        public Action BeLoad { get; set; }
+        public Action BeUnload { get; set; }
 
         protected internal override Action AddReceiver(Action<T> receiver)
         {
-            var unload = ReceiverSet.Count == 0;
+            var unloadLast = ReceiverSet.Count == 0;
             var remove = base.AddReceiver(receiver);
-            if (unload)
+            if (unloadLast)
             {
-                BeLoadEmitter.Emit(0);
+                BeLoad();
             }
 
             return removeReceiver;
 
             void removeReceiver()
             {
-                var load = ReceiverSet.Count != 0;
+                var loadLast = ReceiverSet.Count != 0;
                 remove();
-                if (ReceiverSet.Count == 0 && load)
+                var unload = ReceiverSet.Count == 0;
+                if (unload && loadLast)
                 {
-                    BeUnloadEmitter.Emit(0);
+                    BeUnload();
                 }
             }
         }
-
-        private readonly Emitter<Int32> BeLoadEmitter = new Emitter<int>();
-        private readonly Emitter<Int32> BeUnloadEmitter = new Emitter<int>();
     }
 }
